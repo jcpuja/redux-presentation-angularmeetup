@@ -1,21 +1,22 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Angular and Redux with ng-redux</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/jc.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
-			var link = document.createElement( 'link' );
+			const link = document.createElement('link');
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
@@ -25,8 +26,83 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1>Angular & Redux</h1>
+					<p>with ng-redux</p>
+				</section>
+
+				<section>
+					<h3>What we'll see</h3>
+
+					<p>Why Redux?</p>
+					<p>Redux Building Blocks</p>
+					<p>Redux + Angular</p>
+					<p>Managing Side-Effects with Epics</p>
+
+				</section>
+
+				<section>
+					<section>
+						<h3>Why Redux?</h3>
+					</section>
+
+					<section>
+						<p>Your app has state.</p>
+						<img alt="tesla-state" src="img/tesla-state.png">
+						<aside class="notes">
+							One of the most obvious types of state is whatever makes up your business logic.
+							Here in this Tesla Configurator example, the state of your app is mostly keeping track of which options your user has selected for their car.
+						</aside>
+					</section>
+
+					<section>
+						<p>State is usually shared...</p>
+						<img alt="tesla-shared" src="img/tesla-shared.png">
+						<aside class="notes">
+							We can see here that this state has an impact on other parts of the app, typically showing totals before checkout, or displaying an image appropriate for the selected configuration.
+						</aside>
+					</section>
+
+					<section>
+						<p>...across the app.</p>
+						<img src="img/shared-state-component.svg" class="component-tree" alt="shared-state-component">
+						<aside class="notes">
+							When you look at the code side of things, this is probably typically how your app would be structured. One component for each custom UI control.
+						</aside>
+					</section>
+
+					<section>
+						<p>Ad-hoc?</p>
+						<img src="img/shared-state-ad-hoc.svg" class="component-tree" alt="shared-state-component">
+						<aside class="notes">
+							Naively, we could keep the state for each option in its respective component. But how do we compute the total price way over there in the checkout component? [other examples]
+							This gets confusing and error-prone very fast.
+						</aside>
+					</section>
+
+					<section>
+						<p>Bucket brigade?</p>
+						<img src="img/shared-state-bucket-brigade.svg" class="component-tree" alt="shared-state-component">
+						<aside class="notes">
+							OK, so we could keep the options all the way at the top, and use @Inputs and @Outputs to keep them up to date. Quickly we'll have a "bucket brigade" of passing data up and down the hierarchy.
+							This could be ok for smallish apps, but cumbersome if you have more layers.
+						</aside>
+					</section>
+
+					<section>
+						<p>The Redux idea</p>
+						<img src="img/shared-state-redux.svg" alt="shared-state-redux" class="component-tree">
+						<aside class="notes">
+							The purpose of redux is to:
+							<ul>
+								<li>Make your global state explicit</li>
+								<li>Manage it centrally</li>
+								<li>Make it available everywhere</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+
 			</div>
 		</div>
 

@@ -1,0 +1,12 @@
+.test-class {
+    background: red;
+}
+
+.reveal section img {
+    border: none;
+}
+
+.reveal section img.component-tree {
+    background: none;
+    box-shadow: none;
+}
