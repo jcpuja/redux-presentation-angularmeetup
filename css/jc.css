@@ -10,3 +10,14 @@
     background: none;
     box-shadow: none;
 }
+
+.reveal section img.unidirectional-data-flow {
+    background: lemonchiffon;
+    box-shadow: none;
+    max-height: 75vh;
+    max-width: 40vw;
+}
+
+.reveal pre code {
+    max-height: 75vh;
+}

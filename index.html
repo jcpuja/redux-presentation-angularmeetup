@@ -35,15 +35,15 @@
 					<h3>What we'll see</h3>
 
 					<p>Why Redux?</p>
-					<p>Redux Building Blocks</p>
+					<p>Redux building blocks</p>
 					<p>Redux + Angular</p>
-					<p>Managing Side-Effects with Epics</p>
+					<p>Managing side-effects with Epics</p>
 
 				</section>
 
 				<section>
 					<section>
-						<h3>Why Redux?</h3>
+						<h2>Why Redux?</h2>
 					</section>
 
 					<section>
@@ -103,6 +103,126 @@
 					</section>
 				</section>
 
+				<section>
+					<section>
+						<h2>Redux building blocks</h2>
+						<p>State</p>
+						<p class="fragment">Actions</p>
+						<p class="fragment">"Reducer" functions</p>
+
+						<aside class="notes">
+							<ul>
+								<li>A single store, where all the global state of the application is kept</li>
+								<li>The state in the store is available everywhere in the application, and can be subscribed to</li>
+								<li>It is immutable and can never be directly mutated. Changing the state is done with the following items:</li>
+								<li>Actions describe something that <em>happened</em> in the app: "Color selected", "Order button pressed"...</li>
+								<li>Reducer functions describe how actions received by the store should change the state. Given state + action, what is the next state?</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<p>State</p>
+						<pre><code class="hljs typescript">const state = {
+    colors: {
+        'red': {
+            price: 2100.00,
+            name: 'Red Multi-Coat'
+        },
+        'blue': {
+            price: 1500.00,
+            name: 'Midnight Blue'
+        }
+    },
+    selectedColor: 'red',
+    winterWheelsSelected: false,
+    trailerHitchSelected: false
+};</code></pre>
+						<p class="fragment">Accessed via the Redux store</p>
+						<p class="fragment">Immutable & normalized</p>
+
+						<aside class="notes">
+							<ul>
+								<li>State = simple JS Object</li>
+								<li>In practice, the Redux store will hold the current state object and make it available for requests => your app's Single Source of Truth</li>
+								<li>But it does not allow directly changing the state => Immutable</li>
+								<li>One good practice is to keep your data normalized [show example]. This way you don't duplicate information and you can query it any way you want in your app.</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<p>Actions</p>
+						<pre><code class="hljs typescript">const colorSelectedAction = {
+    type: 'COLOR_SELECTED',
+    payload: {
+        color: 'blue'
+    }
+};</code></pre>
+						<p class="fragment">Type, maybe Payload</p>
+						<p class="fragment"><em>Dispatch</em>ed to the Redux store</p>
+
+						<aside class="notes">
+							<ul>
+								<li>Actions = simple JS objects that describe what happened in the app</li>
+								<li>Needs to have, at minimum, a Type, so the store can differentiate between 2 actions. The rest is optional / convention</li>
+								<li>Can have a Payload: Information about the event that just happened [give example]</li>
+								<li>From your app, you Dispatch actions to the store.</li>
+							</ul>
+						</aside>
+					</section>
+
+					<section>
+						<p>Reducer functions</p>
+						<pre><code class="hljs typescript">function reducer(state, action) {
+    switch (action.type) {
+        case 'COLOR_SELECTED':
+            return {
+                ...state,
+                selectedColor: action.payload.color
+            };
+
+        // Other actions...
+    }
+}</code></pre>
+						<p class="fragment">Pure functions (no side-effects)</p>
+						<p class="fragment">Executed by the Redux Store</p>
+
+						<aside class="notes">
+							<ul>
+								<li>Reducers = functions that describe the impact of an action on the app state</li>
+								<li>They always take as input a given state and an action, and they return a new state
+									(new instance!)
+								</li>
+								<li>Pure functions, no side-effects, no dependencies => Testing heaven!</li>
+								<li>Just functions => compose them however you want</li>
+								<li>Concretely, redux executes the reducer function whenever an action is dispatched.
+								</li>
+							</ul>
+						</aside>
+					</section>
+
+
+					<section>
+						<p>Recap</p>
+						<img src="img/unidirectional-data-flow.gif" class="unidirectional-data-flow" alt="unidirectional-data-flow">
+
+						<aside class="notes">
+							[explain diagram], Clean separation of read and write => unidirectional data flow
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>References</h2>
+					<div style="font-size: medium">
+						<p>Flux Standard Actions: <a href="https://github.com/redux-utilities/flux-standard-action">https://github.com/redux-utilities/flux-standard-action</a></p>
+						<p>Analysis of state management in Angular: <a href="https://blog.oasisdigital.com/2016/managing-state-angular-2/">https://blog.oasisdigital.com/2016/managing-state-angular-2/</a></p>
+						<p>Redux docs & tutorial: <a href="https://redux.js.org/docs/introduction/">https://redux.js.org/docs/introduction/</a></p>
+						<p>ng-redux tutorial: <a href="https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md">https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md</a></p>
+						<p>Data flow diagrams: <a href="https://github.com/reactjs/redux/issues/653">https://github.com/reactjs/redux/issues/653</a></p>
+					</div>
+				</section>
 			</div>
 		</div>
 
