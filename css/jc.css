@@ -18,6 +18,13 @@
     max-width: 40vw;
 }
 
+.reveal section img.logo {
+    max-width: 10%;
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
 .reveal pre code {
     max-height: 75vh;
 }
