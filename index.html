@@ -282,12 +282,64 @@
 				</section>
 
 				<section>
+					<section>
+						<h2>Managing side-effects with Epics</h2>
+					</section>
+
+					<section>
+						<p>Async actions</p>
+						<pre><code class="hljs typescript">function asyncAction() {
+    ngRedux.dispatch(fetchStart());
+    http.get('http://url/foobar')
+        .subscribe(
+            result => ngRedux.dispatch(fetchSuccess(result)),
+            error => ngRedux.dispatch(fetchError(error))
+        );
+}</code></pre>
+						<p>Hard to test</p>
+						<p>Don't scale well</p>
+						<p>Hard to combine</p>
+					</section>
+
+					<section>
+						<p>"Epics": <em>Actions in, actions out.</em></p>
+						<pre><code class="hljs typescript">const pingEpic = action$ => action$.pipe(
+    filter(action => action.type === 'PING'),
+    delay(1000), // Simulation of async work
+    mapTo({ type: 'PONG' })
+);</code></pre>
+						<p>Declarative</p>
+						<p>Isolate side-effects</p>
+						<p>Use the power of Observables</p>
+					</section>
+
+					<section>
+						<p>Data flow with Epics</p>
+						<img src="img/redux-data-flow-with-epics.gif" class="unidirectional-data-flow" alt="data-flow-with-epics">
+					</section>
+				</section>
+
+				<section>
+					<h3>Demo (again)</h3>
+					<h3>💻</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Implement Epics class: @Injectable, constructor with http, Epic field, cut/paste http call from component</li>
+							<li>Create epic middleware in AppModule: createEpicMiddleware(), inject Epics class, run enterpriseRandomEpic</li>
+							<li>Cleanup component</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
 					<h2>References</h2>
-					<div style="font-size: medium">
-						<p>Flux Standard Actions: <a href="https://github.com/redux-utilities/flux-standard-action">https://github.com/redux-utilities/flux-standard-action</a></p>
+					<div class="references">
 						<p>Analysis of state management in Angular: <a href="https://blog.oasisdigital.com/2016/managing-state-angular-2/">https://blog.oasisdigital.com/2016/managing-state-angular-2/</a></p>
 						<p>Redux docs & tutorial: <a href="https://redux.js.org/docs/introduction/">https://redux.js.org/docs/introduction/</a></p>
+						<p>Flux Standard Actions, a good convention for Action structure: <a href="https://github.com/redux-utilities/flux-standard-action">https://github.com/redux-utilities/flux-standard-action</a></p>
 						<p>angular-redux tutorial: <a href="https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md">https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md</a></p>
+						<p>Redux-observable: <a href="https://redux-observable.js.org/">https://redux-observable.js.org/</a></p>
 						<p>Data flow diagrams: <a href="https://github.com/reactjs/redux/issues/653">https://github.com/reactjs/redux/issues/653</a></p>
 					</div>
 				</section>
