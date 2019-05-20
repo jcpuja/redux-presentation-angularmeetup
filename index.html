@@ -246,12 +246,48 @@
 				</section>
 
 				<section>
+					<h3>Demo</h3>
+					<h3>💻</h3>
+
+					<aside class="notes">
+						<ul>
+							<li>Describe component</li>
+							<li>Fill template: Title, Count with 0, Button -, Button +</li>
+							<li>Define state: create state.ts. 1 "count" number. Interface AppState +
+								INITIAL_STATE.
+							</li>
+							<li>Define actions: create actions.ts, static type constants INCREMENT+DECREMENT,
+								static methods
+							</li>
+							<li>Define reducers: create reducers.ts, export function rootReducer(lastState: AppState,
+								action: Action
+							</li>
+							<li>Connect redux to angular: in AppModule constructor:</li>
+							<li><pre><code>constructor(ngRedux: NgRedux&lt;AppState&gt;) {
+  ngRedux.configureStore(rootReducer, INITIAL_STATE)
+}</code></pre>
+							</li>
+							<li>Connect component template to methods: Call actions from the buttons, select count from store</li>
+							<li>Show DevTools</li>
+
+							<li>What if we want to set it to a random number? Not just a frontend random, an Enterprise Random?</li>
+							<li>[Show mock-backend call] Create model interface EnterpriseRandom</li>
+							<li>Explain standard pattern Request/Success/Error</li>
+							<li>Setup Actions: enterpriseRandomRequest, enterpriseRandomSuccess</li>
+							<li>Link to buttons, setup HTTP call, show dev tools</li>
+							<li>Setup reducer for count</li>
+							<li>Add "fetching" flag to state, reducer, UI</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
 					<h2>References</h2>
 					<div style="font-size: medium">
 						<p>Flux Standard Actions: <a href="https://github.com/redux-utilities/flux-standard-action">https://github.com/redux-utilities/flux-standard-action</a></p>
 						<p>Analysis of state management in Angular: <a href="https://blog.oasisdigital.com/2016/managing-state-angular-2/">https://blog.oasisdigital.com/2016/managing-state-angular-2/</a></p>
 						<p>Redux docs & tutorial: <a href="https://redux.js.org/docs/introduction/">https://redux.js.org/docs/introduction/</a></p>
-						<p>ng-redux tutorial: <a href="https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md">https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md</a></p>
+						<p>angular-redux tutorial: <a href="https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md">https://github.com/angular-redux/store/blob/master/articles/intro-tutorial.md</a></p>
 						<p>Data flow diagrams: <a href="https://github.com/reactjs/redux/issues/653">https://github.com/reactjs/redux/issues/653</a></p>
 					</div>
 				</section>
